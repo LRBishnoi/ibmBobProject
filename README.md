@@ -14,8 +14,8 @@ This project answers:
 
 ## 📊 Dashboard Modules
 
-1. **Executive Dashboard** — KPIs, management summary, value distribution and top drivers.
-2. **Market Insights** — correlations, geographic context and value segments.
+1. **Executive Dashboard** — KPIs, management summary, value distribution, top drivers and business interpretation.
+2. **Market Insights** — correlations, geographic context, income-band value trend and market segments.
 3. **Model Performance** — MAE, RMSE, R², actual-vs-predicted chart and feature importance.
 4. **Interactive Price Prediction** — enter a housing profile and receive a model estimate.
 
@@ -51,15 +51,17 @@ The application loads the dataset automatically, so no CSV file is required in t
 - Scikit-learn
 - Streamlit
 
-## 📁 Repository Structure
+## 📁 Submission Files
 
 ```text
 ibmBobProject/
 ├── house_price_app.py
 ├── requirements.txt
-├── PROJECT_REPORT.md
+├── Project_Report.doc
 └── README.md
 ```
+
+`Project_Report.doc` is a Word-compatible document containing the project documentation, methodology, insights, risks, opportunities, actions and application visual. If the internship form requires `.docx` or `.pdf` specifically, save/open this document in Microsoft Word and export it in the required format before uploading.
 
 ## ▶️ Run Locally
 

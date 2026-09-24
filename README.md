@@ -1,31 +1,25 @@
 # 🏠 House Price Prediction & Market Analytics
 
-An internship-ready **Data Analytics + Machine Learning + Business Intelligence** project built with Python and Streamlit.
+An internship-ready **Data Analytics + Machine Learning + Business Intelligence** project built with Python.
 
-The application transforms housing data into **KPIs, market insights, model explanations, predictions, risks, opportunities and recommended actions**.
+## Project Description
 
-## 🎯 Business Problem
+The project analyzes the California Housing dataset to identify price patterns and important drivers, evaluate a Random Forest regression model, and provide a supporting house-value estimate.
 
-Housing organizations need a practical way to understand what factors are associated with property values and to produce a quick, data-driven estimate for a housing profile.
-
-This project answers:
-
-> **Which housing characteristics are most important, what does the market data tell us, and what house value does the model estimate for a selected profile?**
-
-## 📊 Dashboard Modules
+## Dashboard / Analysis Modules
 
 1. **Executive Dashboard** — KPIs, management summary, value distribution, top drivers and business interpretation.
 2. **Market Insights** — correlations, geographic context, income-band value trend and market segments.
-3. **Model Performance** — MAE, RMSE, R², actual-vs-predicted chart and feature importance.
-4. **Interactive Price Prediction** — enter a housing profile and receive a model estimate.
+3. **Model Performance** — MAE, RMSE, R², actual-vs-predicted analysis and feature importance.
+4. **Price Prediction** — model-based estimated median house value for a selected housing profile.
 
-## 🔍 Analytics Workflow
+## Analytics Workflow
 
-**Data → Exploration → KPIs → Drivers → ML Model → Evaluation → Prediction → Business Action**
+**Data → Exploration → KPIs → Trends → Drivers → ML Model → Evaluation → Prediction → Business Action**
 
-## 🧠 Machine Learning
+## Machine Learning
 
-A `RandomForestRegressor` is trained using an 80/20 train-test split with a fixed random seed for reproducibility.
+A `RandomForestRegressor` is trained using an 80/20 train-test split with `random_state=42`.
 
 Evaluation metrics:
 
@@ -33,17 +27,19 @@ Evaluation metrics:
 - **RMSE** — emphasizes larger prediction errors
 - **R²** — proportion of test-set variation explained by the model
 
-## 🗂 Dataset
+## Dataset
 
-The project uses the **California Housing dataset** provided through scikit-learn. It contains housing and demographic variables including median income, house age, average rooms, average bedrooms, population, average occupancy, latitude and longitude, with median house value as the target.
+The project uses the **California Housing dataset** provided through scikit-learn.
 
-Dataset documentation: https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html
+Dataset documentation:
+https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html
 
-The application loads the dataset automatically, so no CSV file is required in the repository.
+The dataset is loaded automatically; no separate CSV is required.
 
-## 🛠 Technology Stack
+## Technologies Used
 
 - Python
+- Jupyter Notebook
 - Pandas
 - NumPy
 - Matplotlib
@@ -51,44 +47,49 @@ The application loads the dataset automatically, so no CSV file is required in t
 - Scikit-learn
 - Streamlit
 
-## 📁 Submission Files
+## Submission Files
 
 ```text
 ibmBobProject/
-├── house_price_app.py
+├── LaduRam_HousePricePrediction.ipynb
 ├── requirements.txt
-├── Project_Report.doc
+├── LaduRam_ProjectReport.docx
 └── README.md
 ```
 
-`Project_Report.doc` is a Word-compatible document containing the project documentation, methodology, insights, risks, opportunities, actions and application visual. If the internship form requires `.docx` or `.pdf` specifically, save/open this document in Microsoft Word and export it in the required format before uploading.
+These are the four files named according to the internship submission instructions.
 
-## ▶️ Run Locally
+## Setup / Run
+
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
-streamlit run house_price_app.py
 ```
 
-The application will open in your browser.
+Open the code notebook:
 
-## 💼 Business Insights & Actions
+```bash
+jupyter notebook
+```
+
+Open `LaduRam_HousePricePrediction.ipynb` and run the code cell from top to bottom.
+
+## Business Insights
 
 ### Opportunity
-Use the strongest model drivers to prioritize deeper market research and property screening.
+Use the strongest model drivers for market screening and deeper analysis.
 
 ### Risk
-The model is trained on historical data and may be less reliable for unusual properties or changing market conditions.
+Historical data may not represent current market conditions, and unusual properties may produce less reliable estimates.
 
-### Recommended action
-Use predictions as an initial decision-support signal and manually review important or unusual cases.
+### Recommended Action
+Use model predictions as decision-support estimates and manually review important or unusual cases.
 
-## ⚠️ Disclaimer
+## Disclaimer
 
-This project is an educational/internship analytics application. Model predictions are estimates and **must not be treated as professional real-estate valuations or financial advice**.
+This is an educational/internship project. Model predictions are estimates based on historical data and are not professional real-estate valuations or financial advice.
 
-## 👨‍💻 Internship Project
+## Repository
 
-**Repository:** `LRBishnoi/ibmBobProject`
-
-Built as a practical demonstration of data analytics, machine learning and business intelligence.
+**GitHub:** `LRBishnoi/ibmBobProject`

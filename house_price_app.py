@@ -36,9 +36,10 @@ def train_model(df):
 
 df = load_data()
 model, metrics, importance, results = train_model(df)
+q1, q2, q3 = df["MedHouseVal"].quantile([0.25, 0.50, 0.75])
 
 st.title("🏠 House Price Prediction & Market Analytics")
-st.caption("An internship-ready analytics application: Data → Insights → Prediction → Action")
+st.caption("Internship project: Data → Insights → Prediction → Action")
 
 with st.sidebar:
     st.header("Project Navigation")
@@ -50,7 +51,6 @@ with st.sidebar:
 
 if page == "Executive Dashboard":
     st.subheader("Executive Dashboard")
-    q1, q2, q3, q4 = df["MedHouseVal"].quantile([0.25, 0.50, 0.75, 0.90])
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Housing Areas", f"{len(df):,}")
     c2.metric("Average Value", f"${df.MedHouseVal.mean():,.0f}")
@@ -88,7 +88,7 @@ if page == "Executive Dashboard":
 
 elif page == "Market Insights":
     st.subheader("Market Insights")
-    st.write("Explore the relationships between housing characteristics and median house value.")
+    st.write("Explore relationships, segments and value patterns in the housing data.")
 
     left, right = st.columns(2)
     corr = df.corr(numeric_only=True)["MedHouseVal"].drop("MedHouseVal").sort_values()
@@ -100,11 +100,23 @@ elif page == "Market Insights":
         st.pyplot(fig, use_container_width=True)
         plt.close(fig)
     with right:
-        st.markdown("#### Location view")
-        map_df = df[["Latitude", "Longitude", "MedHouseVal"]].copy()
-        map_df["size"] = map_df["MedHouseVal"].clip(upper=map_df["MedHouseVal"].quantile(0.95))
-        st.map(map_df.rename(columns={"Latitude": "lat", "Longitude": "lon"})[["lat", "lon"]])
-        st.caption("The map provides geographic context; the current application does not use a price-colored map layer.")
+        st.markdown("#### Geographic context")
+        map_df = df[["Latitude", "Longitude"]].rename(columns={"Latitude": "lat", "Longitude": "lon"})
+        st.map(map_df)
+        st.caption("Geographic distribution of the observations.")
+
+    st.markdown("### Income-band value trend")
+    trend = df.copy()
+    trend["Income Band"] = pd.qcut(trend["MedInc"], 10, duplicates="drop")
+    trend_summary = trend.groupby("Income Band", observed=True)["MedHouseVal"].mean().reset_index()
+    trend_summary["Income Midpoint"] = trend_summary["Income Band"].apply(lambda x: (x.left + x.right) / 2)
+    fig, ax = plt.subplots(figsize=(10, 4))
+    ax.plot(trend_summary["Income Midpoint"], trend_summary["MedHouseVal"], marker="o")
+    ax.set_xlabel("Median income (dataset units)")
+    ax.set_ylabel("Average median house value ($)")
+    ax.set_title("Average house value across income bands")
+    st.pyplot(fig, use_container_width=True)
+    plt.close(fig)
 
     st.markdown("### Market segments")
     df_view = df.copy()
@@ -126,7 +138,7 @@ elif page == "Model Performance":
         sample = results.sample(min(1500, len(results)), random_state=42)
         fig, ax = plt.subplots(figsize=(7, 5))
         ax.scatter(sample["Actual"], sample["Predicted"], alpha=0.35)
-        limits = [min(sample.min()), max(sample.max())]
+        limits = [sample.min().min(), sample.max().max()]
         ax.plot(limits, limits, linestyle="--")
         ax.set_xlabel("Actual value ($)")
         ax.set_ylabel("Predicted value ($)")
@@ -141,7 +153,7 @@ elif page == "Model Performance":
         plt.close(fig)
 
     st.markdown("### Interpretation")
-    st.write("MAE represents the average absolute prediction error, RMSE gives greater weight to larger errors, and R² indicates the proportion of test-set variation explained by the model.")
+    st.write("MAE represents average absolute prediction error, RMSE gives greater weight to larger errors, and R² indicates the proportion of test-set variation explained by the model.")
 
 else:
     st.subheader("Interactive Price Prediction")
